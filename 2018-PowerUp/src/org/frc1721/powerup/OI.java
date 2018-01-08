@@ -37,10 +37,5 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	/* Joes Custom GUI Interface, to add booleans and data to the interface, use the command
-	 * SmartDashboard.putBoolean("Name", var.var()); OR SmartDasboard.putNumber("Name", var.var());
-	 * SmartDashboard.putData(); is used for buttons?
-	 */
-	
 	
 }
