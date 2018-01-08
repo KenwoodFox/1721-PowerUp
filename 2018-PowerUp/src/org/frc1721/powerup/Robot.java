@@ -32,10 +32,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		//Joes GUI engine
 		oi = new OI();
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode", chooser); //Auto Selection
 	}
 
 	/**
@@ -63,6 +65,8 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
+	 * 
+	 * remove this comment when we decide on auto names
 	 */
 	@Override
 	public void autonomousInit() {
