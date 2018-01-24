@@ -35,10 +35,10 @@ public class Robot extends IterativeRobot {
 		RobotMap.vspLeft = new VictorSP(RobotMap.dtLeft);
 		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
 		
-		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
-		
 		RobotMap.vspLeft.setSafetyEnabled(false);
 		RobotMap.vspRight.setSafetyEnabled(false);
+		
+		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 	}
 
 	/**
