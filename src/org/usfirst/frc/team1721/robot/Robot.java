@@ -1,7 +1,6 @@
-
 package org.usfirst.frc.team1721.robot;
 
-import org.usfirst.frc.team1721.robot.subsystems.*;
+import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -37,6 +36,9 @@ public class Robot extends IterativeRobot {
 		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
 		
 		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		
+		RobotMap.vspLeft.setSafetyEnabled(false);
+		RobotMap.vspRight.setSafetyEnabled(false);
 	}
 
 	/**
