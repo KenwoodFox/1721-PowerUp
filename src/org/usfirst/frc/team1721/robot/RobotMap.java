@@ -1,4 +1,4 @@
-package org.frc1721.powerup;
+package org.usfirst.frc.team1721.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -18,4 +18,3 @@ public class RobotMap {
 	
 	public static RobotDrive rd;
 }
-

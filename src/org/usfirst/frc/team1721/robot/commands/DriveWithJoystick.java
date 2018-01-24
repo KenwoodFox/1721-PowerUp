@@ -1,7 +1,7 @@
-package org.frc1721.powerup.commands;
+package org.usfirst.frc.team1721.robot.commands;
 
-import org.frc1721.powerup.Robot;
-import org.frc1721.powerup.RobotMap;
+import org.usfirst.frc.team1721.robot.Robot;
+import org.usfirst.frc.team1721.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 

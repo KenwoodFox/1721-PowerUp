@@ -1,7 +1,7 @@
 
-package org.frc1721.powerup;
+package org.usfirst.frc.team1721.robot;
 
-import org.frc1721.powerup.subsystems.*;
+import org.usfirst.frc.team1721.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
