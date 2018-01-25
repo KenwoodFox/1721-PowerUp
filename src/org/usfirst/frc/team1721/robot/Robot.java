@@ -38,7 +38,9 @@ public class Robot extends IterativeRobot {
 		//RobotMap.vspLeft.setSafetyEnabled(false);
 		//RobotMap.vspRight.setSafetyEnabled(false);
 		
-		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		while(isEnabled() && isOperatorControl()){
+			RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		}
 	}
 
 	/**
@@ -88,7 +90,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		//RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 		Scheduler.getInstance().run();
 	}
 
