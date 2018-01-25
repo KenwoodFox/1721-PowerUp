@@ -4,6 +4,7 @@ import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,11 +36,20 @@ public class Robot extends IterativeRobot {
 		RobotMap.vspLeft = new VictorSP(RobotMap.dtLeft);
 		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
 		
+		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		
 		//RobotMap.vspLeft.setSafetyEnabled(false);
 		//RobotMap.vspRight.setSafetyEnabled(false);
 		
+		//while(isEnabled() && isOperatorControl()){
+		//	RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		//}
+	}
+	
+	public void operatorControl(){
 		while(isEnabled() && isOperatorControl()){
-			RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+			RobotMap.rd.arcadeDrive(RobotMap.stick);
+			Timer.delay(0.005);
 		}
 	}
 
@@ -71,7 +81,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		RobotMap.rd = new RobotDrive(10, 10);
+		//RobotMap.rd = new RobotDrive(10, 10);
 	}
 
 	/**
