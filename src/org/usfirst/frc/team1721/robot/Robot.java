@@ -71,6 +71,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		RobotMap.rd = new RobotDrive(10, 10);
 	}
 
 	/**
