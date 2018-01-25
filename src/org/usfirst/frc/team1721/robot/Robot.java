@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	
-	public static OI oi;
+	public static OI oi; 
 	
 	public static DriveTrain dt;
 
@@ -35,8 +35,8 @@ public class Robot extends IterativeRobot {
 		RobotMap.vspLeft = new VictorSP(RobotMap.dtLeft);
 		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
 		
-		RobotMap.vspLeft.setSafetyEnabled(false);
-		RobotMap.vspRight.setSafetyEnabled(false);
+		//RobotMap.vspLeft.setSafetyEnabled(false);
+		//RobotMap.vspRight.setSafetyEnabled(false);
 		
 		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 	}
@@ -88,6 +88,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 		Scheduler.getInstance().run();
 	}
 
