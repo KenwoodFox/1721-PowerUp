@@ -20,13 +20,13 @@ public class CustomDriveTrain extends Subsystem {
     	double valuePort = 0;
     	double valueStarboard = 0;
     	
-    	double speed = 1 - (1/valueY);
-    	double turnInput = 1 - (1/valueZ);
+    	double speed = 1 - (1.0 / valueY);
+    	double turnInput = 1 - (1.0 / valueZ);
     	
     	SmartDashboard.putNumber("Port: ", valuePort);
     	SmartDashboard.putNumber("Starboard: ", valueStarboard);
     	
-    	r.arcadeDrive(speed, turnInput);
+    	r.drive(speed, turnInput);
     }
     
     //@param r does something amazin			g
