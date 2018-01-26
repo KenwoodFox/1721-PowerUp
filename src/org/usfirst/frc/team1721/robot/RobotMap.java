@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.VictorSP;
  * floating around.
  */
 public class RobotMap {
-	public static final int dtLeft = 0, dtRight = 1;
+	public static final int dtLeft = 1, dtRight = 0;
 	public static VictorSP vspLeft, vspRight;
 	public static final int joyLeft = 0;
 	public static Joystick stick;
