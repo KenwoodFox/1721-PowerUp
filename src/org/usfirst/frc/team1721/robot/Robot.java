@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 	
 	public void operatorControl(){
 		while(isEnabled() && isOperatorControl()){
-			RobotMap.rd.arcadeDrive(RobotMap.stick);
+			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
 			Timer.delay(0.005);
 		}
 	}

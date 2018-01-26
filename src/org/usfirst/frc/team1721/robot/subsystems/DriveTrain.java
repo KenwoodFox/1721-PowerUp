@@ -11,7 +11,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {}
     
-    public void driveWithJoystick(Joystick j, RobotDrive r){
+    public static void driveWithJoystick(Joystick j, RobotDrive r){
     	r.arcadeDrive(j);
     }
     
