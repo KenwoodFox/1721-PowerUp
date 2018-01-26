@@ -1,6 +1,18 @@
 # 2018-PowerUp
-Got the robot working we're off to a great start of code,
+Robots Not bot"
 -Joe 1/25/18
 
 "Great start"
+-Josh 1/26/18
+
+"You've been save"
+-Travis 1/26/18
+
+"Botics 's cool"
+-Nolan (good boi) 1/26/18
+
+"Why?"
+-Abby 1/26/18
+
+"Take off your roboRio, i said mans not bot"
 -Josh 1/26/18
