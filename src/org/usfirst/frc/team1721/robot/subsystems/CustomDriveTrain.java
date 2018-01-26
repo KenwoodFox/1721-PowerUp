@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1721.robot.subsystems;
 
-import org.usfirst.frc.team1721.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,33 +12,19 @@ public class CustomDriveTrain extends Subsystem {
 
     public void initDefaultCommand() {}
     
-    public static void driveWithJoystick(Joystick j/*, RobotDrive r*/){
+    public static void driveWithJoystick(Joystick j, RobotDrive r){
     	
-    	
-    	
-    	double valueX = j.getX();
     	double valueY = j.getY();
     	double valueZ = j.getZ();
     	
     	double valuePort = 0;
     	double valueStarboard = 0;
     	
-    	if(valueZ > 0){
-    		valuePort = valueY;
-    		valueStarboard = valueY - valueZ;
-    	}else if(valueZ < 0){
-    		valueStarboard = valueY;
-    		valuePort = valueY + valueZ;
-    	}else{
-    		valueStarboard = valueY;
-    		valuePort = valueY;
-    	}
     	
     	SmartDashboard.putNumber("Port: ", valuePort);
     	SmartDashboard.putNumber("Starboard: ", valueStarboard);
     	
-    	RobotMap.vspLeft.set(valuePort);
-    	RobotMap.vspRight.set(valueStarboard);
+    	r.arcadeDrive(valueY, valueZ);
     }
     
     //@param r does something amazin			g

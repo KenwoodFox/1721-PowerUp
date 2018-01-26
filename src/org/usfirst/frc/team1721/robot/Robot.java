@@ -42,14 +42,11 @@ public class Robot extends IterativeRobot {
 		//RobotMap.vspLeft.setSafetyEnabled(false);
 		//RobotMap.vspRight.setSafetyEnabled(false);
 		
-		//while(isEnabled() && isOperatorControl()){
-		//	RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
-		//}
 	}
 	
 	public void operatorControl(){
 		while(isEnabled() && isOperatorControl()){
-			CustomDriveTrain.driveWithJoystick(RobotMap.stick/*, RobotMap.rd*/);
+			CustomDriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
 			Timer.delay(0.005);
 		}
 	}
