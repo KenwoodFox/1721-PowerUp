@@ -7,37 +7,40 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTrain extends Subsystem {
+public class CustomDriveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {}
     
-    public static void driveWithJoystick(Joystick j, RobotDrive r){
+    public static void driveWithJoystick(Joystick j/*, RobotDrive r*/){
     	
     	
     	
-    	double valueX = RobotMap.stick.getX();
-    	double valueY = RobotMap.stick.getY();
-    	double valueZ = RobotMap.stick.getZ();
+    	double valueX = j.getX();
+    	double valueY = j.getY();
+    	double valueZ = j.getZ();
     	
-    	double valuePort;
-    	double valueStarboard;
+    	double valuePort = 0;
+    	double valueStarboard = 0;
     	
-    	RobotMap.vspLeft.set(valuePort);
-    	RobotMap.vspRight.set(valueStarboard);
+    	if(valueZ > 0){
+    		valuePort = valueY;
+    		valueStarboard = valueY - valueZ;
+    	}else if(valueZ < 0){
+    		valueStarboard = valueY;
+    		valuePort = valueY + valueZ;
+    	}else{
+    		valueStarboard = valueY;
+    		valuePort = valueY;
+    	}
     	
     	SmartDashboard.putNumber("Port: ", valuePort);
     	SmartDashboard.putNumber("Starboard: ", valueStarboard);
     	
-    	
-    	//RobotThingies
-    	
-    	
-    	
-    	
-    	
+    	RobotMap.vspLeft.set(valuePort);
+    	RobotMap.vspRight.set(valueStarboard);
     }
     
     //@param r does something amazin			g
