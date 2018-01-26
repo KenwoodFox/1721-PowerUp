@@ -15,7 +15,7 @@ public class DriveTrain extends Subsystem {
     	r.arcadeDrive(j);
     }
     
-    //@param r does something amazin----------------g
+    //@param r does something amazin			g
     
     public void stop(RobotDrive r){
     	r.drive(0,  0);
