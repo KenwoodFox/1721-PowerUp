@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1721.robot.subsystems;
 
-import org.usfirst.frc.team1721.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,7 +16,13 @@ public class AutonomousDrive extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    public static void DriveInAuto(Encoder port, Encoder starboard, RobotDrive r){
+    public static void DriveToDistance(Encoder port, Encoder starboard, RobotDrive r){
+    	
+    }
+    public static void DriveAndStop(Encoder port, Encoder starboard, RobotDrive r){
+    	
+    }
+    public static void Turn(Encoder port, Encoder starboard, RobotDrive r){
     	
     }
     public static void InitiateEncoders(Encoder port, Encoder starboard){
