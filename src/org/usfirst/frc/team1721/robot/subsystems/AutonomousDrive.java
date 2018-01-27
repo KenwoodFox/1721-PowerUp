@@ -25,8 +25,8 @@ public class AutonomousDrive extends Subsystem {
     	//Need a variable Dist
     	
     	//Convert to inches
-    	Encoder port = /*math*/ portDist;
-    	Encoder starboard = /*math*/ starboardDist; //dist vars are measured in inches, if the encoder is already outputing a distance, converte distance to inches rather than speed to dist
+    	/*math*/ portDist = Encoder port;
+    	/*math*/ starboardDist = Encoder starboard; //dist vars are measured in inches, if the encoder is already outputing a distance, converte distance to inches rather than speed to dist
     	
     	
     	
@@ -37,7 +37,6 @@ public class AutonomousDrive extends Subsystem {
     public static void Turn(Encoder port, Encoder starboard, RobotDrive r){
     	 
     }
-    
     public static void InitiateEncoders(Encoder port, Encoder starboard){
     	port.setMaxPeriod(1);
 		port.setMinRate(5);
