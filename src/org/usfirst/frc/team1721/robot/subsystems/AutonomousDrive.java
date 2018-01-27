@@ -17,13 +17,24 @@ public class AutonomousDrive extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public static void DriveToDistance(Encoder port, Encoder starboard, RobotDrive r){
+    	/* P = Error
+    	 * I = Integral (does not go to zero as you reach target) (Only equals 0 at target, accumulates as long as there is an error)
+    	 * D = Diritive (Slows the acceleration)
+    	 */
+    	
+    	//Need a variable Dist
+    	
+    	//Convert to inches
+    	Encoder port = /*math*/ portDist;
+    	Encoder starboard = /*math*/ starboardDist; //dist vars are measured in inches, if the encoder is already outputing a distance, converte distance to inches rather than speed to dist
+    	
     	
     }
     public static void DriveAndStop(Encoder port, Encoder starboard, RobotDrive r){
     	
     }
     public static void Turn(Encoder port, Encoder starboard, RobotDrive r){
-    	
+    	 
     }
     public static void InitiateEncoders(Encoder port, Encoder starboard){
     	port.setMaxPeriod(1);
