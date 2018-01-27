@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1721.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -15,6 +16,8 @@ public class RobotMap {
 	public static VictorSP vspLeft, vspRight;
 	public static final int joyLeft = 0;
 	public static Joystick stick;
+	public static Encoder encPort, encStarboard;
+	
 	
 	public static RobotDrive rd;
 }

@@ -1,7 +1,9 @@
 package org.usfirst.frc.team1721.robot;
 
+import org.usfirst.frc.team1721.robot.subsystems.AutonomousDrive;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
@@ -35,6 +37,12 @@ public class Robot extends IterativeRobot {
 		//Declare Victors
 		RobotMap.vspLeft = new VictorSP(RobotMap.dtLeft);
 		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
+		//Declare encoders
+		RobotMap.encPort = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		RobotMap.encStarboard = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+		
+		AutonomousDrive.InitiateEncoders(RobotMap.encPort, RobotMap.encStarboard);
+		
 		
 		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 		
