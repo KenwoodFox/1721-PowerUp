@@ -1,9 +1,10 @@
 package org.usfirst.frc.team1721.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -12,12 +13,13 @@ import edu.wpi.first.wpilibj.VictorSP;
  * floating around.
  */
 public class RobotMap {
-	public static final int dtLeft = 1, dtRight = 0;
-	public static VictorSP vspLeft, vspRight;
-	public static final int joyLeft = 0;
+	public static final int dtLeft = 1, dtRight = 0; //TalonSRX ids
+	public static CANTalon talonLeft, talonRight;
+	public static final int joyLeft = 0; //Joystick id
 	public static Joystick stick;
-	public static Encoder encPort, encStarboard;
-	
+	public static Encoder encPort;
+	public static Encoder encStarboard;
+	public static final int pValue = 1, iValue = 1, dValue = 1; //P, I, and D values passed to Talons
 	
 	public static RobotDrive rd;
 }
