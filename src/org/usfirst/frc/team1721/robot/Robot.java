@@ -3,11 +3,13 @@ package org.usfirst.frc.team1721.robot;
 import org.usfirst.frc.team1721.robot.subsystems.AutonomousDrive;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -35,16 +37,16 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		dt = new DriveTrain();
 		//Declare Victors
-		RobotMap.vspLeft = new VictorSP(RobotMap.dtLeft);
-		RobotMap.vspRight = new VictorSP(RobotMap.dtRight);
+		RobotMap.talonLeft = new CANTalon(RobotMap.dtLeft);
+		RobotMap.talonRight = new CANTalon(RobotMap.dtRight);
 		//Declare encoders
 		RobotMap.encPort = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 		RobotMap.encStarboard = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-		
-		AutonomousDrive.InitiateEncoders(RobotMap.encPort, RobotMap.encStarboard);
-		
-		
-		RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
+		//Initialize Talons with encoder feedback
+		RobotMap.talonLeft.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		RobotMap.talonLeft.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		//Create drive object for teleop.
+		RobotMap.rd = new RobotDrive(RobotMap.talonLeft, RobotMap.talonRight);
 		
 		//RobotMap.vspLeft.setSafetyEnabled(false);
 		//RobotMap.vspRight.setSafetyEnabled(false);
@@ -89,7 +91,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//RobotMap.rd = new RobotDrive(10, 10);
+		//Start encoder measurement
+		AutonomousDrive.InitiateEncoders(RobotMap.encPort, RobotMap.encStarboard);
+		
 	}
 
 	/**
@@ -109,7 +113,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
 		Scheduler.getInstance().run();
 	}
 
