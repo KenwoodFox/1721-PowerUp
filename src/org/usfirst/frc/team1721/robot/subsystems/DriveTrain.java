@@ -13,7 +13,7 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {}
-    
+    //Command that drives the robot in teleop
     public static void driveWithJoystick(Joystick j, RobotDrive r){
     	r.arcadeDrive(j);
     }
