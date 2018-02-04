@@ -1,14 +1,18 @@
 package org.usfirst.frc.team1721.robot;
 
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1721.robot.subsystems.Intake;
+import org.usfirst.frc.team1721.robot.subsystems.Lift;
 
+import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.MotorSafety;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -34,22 +38,40 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		dt = new DriveTrain();
-		//Declare Victors
-		RobotMap.driveTalonLeft = new WPI_TalonSRX(RobotMap.dtLeft);
-		RobotMap.driveTalonRight = new WPI_TalonSRX(RobotMap.dtRight);
-		
-		RobotMap.rd = new RobotDrive(RobotMap.driveTalonLeft, RobotMap.driveTalonRight);
-		
+		//Declare drive Talons
+		RobotMap.driveTalonLeft = new WPI_TalonSRX(RobotMap.driveMasterLeft);
+		RobotMap.driveTalonRight = new WPI_TalonSRX(RobotMap.driveMasterRight);
+		//Declare drive Victors for WPI purposes
+		RobotMap.driveVictorLeft = new WPI_VictorSPX(RobotMap.driveSlaveLeft);
+		RobotMap.driveVictorRight = new WPI_VictorSPX(RobotMap.driveSlaveRight);
+		//Declare drivetrain
+		RobotMap.rd = new DifferentialDrive(RobotMap.driveTalonLeft, RobotMap.driveTalonRight);
+		//Turn off safety
 		RobotMap.driveTalonLeft.setSafetyEnabled(false);
 		RobotMap.driveTalonRight.setSafetyEnabled(false);
+		RobotMap.rd.setSafetyEnabled(false);
+		//Declare joystick
+		RobotMap.stick = new Joystick(RobotMap.stickPort);
+		//Declare controller
+		RobotMap.controller = new Joystick(RobotMap.controllerPort);
+		//Set drive Victors to follower mode
+		RobotMap.driveVictorLeft.follow(RobotMap.driveTalonLeft);
+		RobotMap.driveVictorRight.follow(RobotMap.driveTalonRight);
+		//Declare drive Victors for CTRE purposes
+		RobotMap.canTalonRight = new CANTalon(RobotMap.driveMasterRight);
+		RobotMap.canTalonLeft = new CANTalon(RobotMap.driveMasterLeft);
+		//Declare intake Victors
+		RobotMap.intakeVictorLeft = new WPI_VictorSPX(RobotMap.intakeLeft);
+		RobotMap.intakeVictorRight = new WPI_VictorSPX(RobotMap.intakeRight);
+		//Declare lift Talon
+		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftMaster);
+		//Declare lift Victor
+		RobotMap.liftVictor = new WPI_VictorSPX(RobotMap.liftSlave);
+		//Set lift Victor to follower mode
+		RobotMap.liftVictor.follow(RobotMap.liftTalon);
 	}
 	
-	public void operatorControl(){
-		while(isEnabled() && isOperatorControl()){
-			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
-			Timer.delay(0.05);
-		}
-	}
+	
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -80,25 +102,32 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		while (isEnabled() && isAutonomous()) {
+		RobotMap.rd.arcadeDrive(10, 0);
+		}
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
-	@Override
-	public void autonomousPeriodic() {
-		
-	}
-
+	
 	@Override
 	public void teleopInit() {
+		while (isEnabled() && isOperatorControl()) {
+			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
+			//Intake.ExpelCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
+			//Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
+			Lift.RaiseLift(RobotMap.liftTalon, RobotMap.controller);
+			Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+		}
 	}
 
 	/**
 	 * This function is called periodically during operator control
 	 */
-
+public void teleopPeriodic() {
+	Scheduler.getInstance().run();
+}
 	/**
 	 * This function is called periodically during test mode
 	 */

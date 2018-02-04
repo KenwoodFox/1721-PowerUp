@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1721.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  *
@@ -14,14 +14,16 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {}
     
-    public static void driveWithJoystick(Joystick j, RobotDrive r){
-    	r.arcadeDrive(j);
+    public static void driveWithJoystick(Joystick j, DifferentialDrive r){
+    	double axis = j.getY();
+    	double turn = j.getZ();
+    	r.arcadeDrive(axis, turn);
     }
     /**
      * 
      * @param r 
      */
-    public void stop(RobotDrive r){
-    	r.drive(0,  0);
+    public void stop(DifferentialDrive r){
+    	r.arcadeDrive(0,  0);
     }
 }
