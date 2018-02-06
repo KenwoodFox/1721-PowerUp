@@ -1,16 +1,17 @@
 package org.usfirst.frc.team1721.robot;
 
+import org.usfirst.frc.team1721.robot.commands.GoToFloor;
+import org.usfirst.frc.team1721.robot.commands.GoToScale;
+import org.usfirst.frc.team1721.robot.commands.GoToSwitch;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1721.robot.subsystems.Intake;
-import org.usfirst.frc.team1721.robot.subsystems.Lift;
 
 import com.ctre.CANTalon;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -64,11 +65,11 @@ public class Robot extends IterativeRobot {
 		RobotMap.intakeVictorLeft = new WPI_VictorSPX(RobotMap.intakeLeft);
 		RobotMap.intakeVictorRight = new WPI_VictorSPX(RobotMap.intakeRight);
 		//Declare lift Talon
-		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftMaster);
-		//Declare lift Victor
-		RobotMap.liftVictor = new WPI_VictorSPX(RobotMap.liftSlave);
-		//Set lift Victor to follower mode
-		RobotMap.liftVictor.follow(RobotMap.liftTalon);
+		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftMotor);
+		
+		RobotMap.goToFloorButton = new JoystickButton(RobotMap.controller, 1);
+		RobotMap.goToScaleButton = new JoystickButton(RobotMap.controller, 4);
+		RobotMap.goToSwitchButton = new JoystickButton(RobotMap.controller, 2);
 	}
 	
 	
@@ -102,6 +103,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		RobotMap.isAtFloor = true;
+		RobotMap.isAtScale = false;
+		RobotMap.isAtSwitch = false;
 		while (isEnabled() && isAutonomous()) {
 		RobotMap.rd.arcadeDrive(10, 0);
 		}
@@ -117,8 +121,9 @@ public class Robot extends IterativeRobot {
 			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
 			//Intake.ExpelCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
 			//Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
-			Lift.RaiseLift(RobotMap.liftTalon, RobotMap.controller);
-			Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+			RobotMap.goToFloorButton.whenPressed(new GoToFloor());
+			RobotMap.goToScaleButton.whenPressed(new GoToScale());
+			RobotMap.goToSwitchButton.whenPressed(new GoToSwitch());
 		}
 	}
 

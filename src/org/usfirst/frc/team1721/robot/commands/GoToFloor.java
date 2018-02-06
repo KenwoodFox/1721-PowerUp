@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LowerLift extends Command {
+public class GoToFloor extends Command {
 
-    public LowerLift() {
+    public GoToFloor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,7 +21,7 @@ public class LowerLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+    	Lift.moveToFloor(RobotMap.liftTalon);
     }
 
     // Make this return true when this Command no longer needs to run execute()
