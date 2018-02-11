@@ -13,11 +13,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * floating around.
  */
 public class RobotMap {
-	public static final int dtLeft = 0, dtRight = 1, slaveDriveLeft = 1, slaveDriveRight = 0, intakeButton = 6, outputButton = 5, intakeMaster = 3, intakeSlave = 4;
+	//CAN addresses for Talons and Victors
+	public static final int dtLeft = 0, dtRight = 1, slaveDriveLeft = 1, slaveDriveRight = 0, intakeMaster = 3, intakeSlave = 4, liftTalonAddress = 2;
+	//Controller and joystick axis/button assignments
+	public static final int	intakeAxis = 5, raiseLiftAxis = 3, lowerLiftAxis = 2, joystickPort = 0, controllerPort = 1;
+	//Talon objects
 	public static WPI_TalonSRX vspLeft, vspRight, liftTalon;
+	//Victor objects
 	public static WPI_VictorSPX slaveLeft, slaveRight, intakeVictorRight, intakeVictorLeft;
-	public static final int joyLeft = 0;
+	//Joystick objects
 	public static Joystick stick, controller;
-	
+	//DriveTrain object
 	public static DifferentialDrive rd;
 }

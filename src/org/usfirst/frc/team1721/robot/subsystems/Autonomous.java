@@ -1,3 +1,7 @@
+/* Class for declaring autonomous commands. Used to keep all commands on
+ * a single thread.
+ */
+
 package org.usfirst.frc.team1721.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -9,13 +13,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Autonomous extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	
     }
+    /** Shows switch and scale positions on SmartDashboard. Open YML.yml.xml to
+     * view.
+     */
     public static void showSwitchPositions() {
     	String gameData = DriverStation.getInstance().getGameSpecificMessage();
     	DriverStation.Alliance allianceColor = DriverStation.getInstance().getAlliance();

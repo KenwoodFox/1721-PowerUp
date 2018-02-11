@@ -2,8 +2,7 @@ package org.usfirst.frc.team1721.robot;
 
 import org.usfirst.frc.team1721.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1721.robot.subsystems.Intake;
-import org.usfirst.frc.team1721.robot.subsystems.Lift;
+import org.usfirst.frc.team1721.robot.subsystems.TeleOp;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -41,36 +40,32 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		dt = new DriveTrain();
-		//Declare Victors
+		//Initialize drive Talons
 		RobotMap.vspLeft = new WPI_TalonSRX(RobotMap.dtLeft);
 		RobotMap.vspRight = new WPI_TalonSRX(RobotMap.dtRight);
-		
+		//Initialize drive slave Victors
 		RobotMap.slaveLeft = new WPI_VictorSPX(RobotMap.slaveDriveLeft);
 		RobotMap.slaveRight = new WPI_VictorSPX(RobotMap.slaveDriveRight);
-		
+		//Set drive slaves to follower mode
 		RobotMap.slaveLeft.follow(RobotMap.vspLeft);
 		RobotMap.slaveRight.follow(RobotMap.vspRight);
-		
+		//Initialize drive train
 		RobotMap.rd = new DifferentialDrive(RobotMap.vspLeft, RobotMap.vspRight);
-		
-		RobotMap.stick = new Joystick(0);
-		
+		//Initialize drive joystick
+		RobotMap.stick = new Joystick(RobotMap.joystickPort);
+		//Disabled drive safety
 		RobotMap.vspLeft.setSafetyEnabled(false);
 		RobotMap.vspRight.setSafetyEnabled(false);
 		RobotMap.rd.setSafetyEnabled(false);
-		
-		RobotMap.liftTalon = new WPI_TalonSRX(2);
-		
-		RobotMap.controller = new Joystick(1);
-		
+		//Initialize lift Talon
+		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftTalonAddress);
+		//Initialize operator controller
+		RobotMap.controller = new Joystick(RobotMap.controllerPort);
+		//Initialize intake Victors
 		RobotMap.intakeVictorLeft = new WPI_VictorSPX(RobotMap.intakeMaster);
 		RobotMap.intakeVictorRight = new WPI_VictorSPX(RobotMap.intakeSlave);
-		
+		//Set right intake Victor to follow left intake Victor
 		RobotMap.intakeVictorRight.follow(RobotMap.intakeVictorLeft);
-		
-		//while(isEnabled() && isOperatorControl()){
-		//	RobotMap.rd = new RobotDrive(RobotMap.vspLeft, RobotMap.vspRight);
-		//}
 	}
 
 	/**
@@ -115,13 +110,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		while(isEnabled() && isOperatorControl()){
-			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
-			Lift.RaiseLift(RobotMap.liftTalon, RobotMap.controller);
-			if(RobotMap.controller.getRawAxis(2) > 0) {
-			Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+		while(isEnabled() && isOperatorControl()){ // Runs periodically (every 25 ms) during teleop
+			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd); // Drive
+			TeleOp.RaiseLift(RobotMap.liftTalon, RobotMap.controller); // Raise lift
+			if(RobotMap.controller.getRawAxis(2) > 0) { // Ensures brake mode does not stop the lift from rising
+			TeleOp.LowerLift(RobotMap.liftTalon, RobotMap.controller);// Lower lift
 			}
-			Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);
+			TeleOp.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);// Intakes and expels cubes
 			Timer.delay(0.005);
 		}
 	}
