@@ -1,8 +1,10 @@
 package org.usfirst.frc.team1721.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -20,9 +22,14 @@ public class RobotMap {
 	//Talon objects
 	public static WPI_TalonSRX vspLeft, vspRight, liftTalon;
 	//Victor objects
-	public static WPI_VictorSPX slaveLeft, slaveRight, intakeVictorRight, intakeVictorLeft;
+	public static WPI_VictorSPX slaveLeft, slaveRight, intakeVictorRight, intakeVictorLeft, liftVictor, intakeLifter;
 	//Joystick objects
 	public static Joystick stick, controller;
 	//DriveTrain object
 	public static DifferentialDrive rd;
+	
+	public static DigitalInput isAtTop, isAtBottom, intakeLifted;
+	
+	public static FeedbackDevice encRight;
+	public static FeedbackDevice encLeft;
 }

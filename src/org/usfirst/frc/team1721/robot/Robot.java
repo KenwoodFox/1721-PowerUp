@@ -1,20 +1,29 @@
 package org.usfirst.frc.team1721.robot;
 
+import org.usfirst.frc.team1721.robot.commands.DriveToBaseline;
+import org.usfirst.frc.team1721.robot.commands.IntakeCube;
+import org.usfirst.frc.team1721.robot.commands.NullAuto;
+import org.usfirst.frc.team1721.robot.commands.PIDfromLeft;
+import org.usfirst.frc.team1721.robot.commands.PIDfromRight;
+import org.usfirst.frc.team1721.robot.commands.SwitchFromLeft;
+import org.usfirst.frc.team1721.robot.commands.SwitchFromRight;
 import org.usfirst.frc.team1721.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1721.robot.subsystems.TeleOp;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -26,7 +35,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	
+	public static SendableChooser autoChooser;
+	Command autonomousCommand;
 	public static OI oi; 
 	
 	public static DriveTrain dt;
@@ -57,8 +67,8 @@ public class Robot extends IterativeRobot {
 		RobotMap.vspLeft.setSafetyEnabled(false);
 		RobotMap.vspRight.setSafetyEnabled(false);
 		RobotMap.rd.setSafetyEnabled(false);
-		//Initialize lift Talon
-		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftTalonAddress);
+		//Initialize lift Victor
+		RobotMap.liftVictor = new WPI_VictorSPX(5);
 		//Initialize operator controller
 		RobotMap.controller = new Joystick(RobotMap.controllerPort);
 		//Initialize intake Victors
@@ -66,6 +76,24 @@ public class Robot extends IterativeRobot {
 		RobotMap.intakeVictorRight = new WPI_VictorSPX(RobotMap.intakeSlave);
 		//Set right intake Victor to follow left intake Victor
 		RobotMap.intakeVictorRight.follow(RobotMap.intakeVictorLeft);
+		
+		RobotMap.intakeLifter = new WPI_VictorSPX(2);
+		
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Drive to baseline" , new DriveToBaseline());
+		autoChooser.addObject("Null auto", new NullAuto());
+		autoChooser.addObject("Switch from right", new SwitchFromRight());
+		autoChooser.addObject("Switch from left", new SwitchFromLeft());
+		autoChooser.addObject("PID from left", new PIDfromLeft());
+		autoChooser.addObject("PID from right", new PIDfromRight());
+		SmartDashboard.putData("Autonomous mode chooser", autoChooser);
+		
+		//RobotMap.vspLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		//RobotMap.vspRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		
+		RobotMap.intakeLifted = new DigitalInput(1);
+		RobotMap.isAtTop = new DigitalInput(2);
+		RobotMap.isAtBottom = new DigitalInput(0);
 	}
 
 	/**
@@ -97,7 +125,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		Autonomous.showSwitchPositions();
-		
+		autonomousCommand = (Command) autoChooser.getSelected();
+		autonomousCommand.start();
 	}
 
 	/**
@@ -111,12 +140,18 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		while(isEnabled() && isOperatorControl()){ // Runs periodically (every 25 ms) during teleop
+			//RobotMap.intakeLifter.set(-0.8);
+			SmartDashboard.putBoolean("Max Intake Extension: ", RobotMap.intakeLifted.get());
+			SmartDashboard.putBoolean("Max Lift Extension:", RobotMap.isAtTop.get());
+			SmartDashboard.putBoolean("Min Lift Extension:", RobotMap.isAtBottom.get());
 			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd); // Drive
-			TeleOp.RaiseLift(RobotMap.liftTalon, RobotMap.controller); // Raise lift
+			TeleOp.RaiseLift(RobotMap.liftVictor, RobotMap.controller); // Raise lift
 			if(RobotMap.controller.getRawAxis(2) > 0) { // Ensures brake mode does not stop the lift from rising
-			TeleOp.LowerLift(RobotMap.liftTalon, RobotMap.controller);// Lower lift
+				TeleOp.LowerLift(RobotMap.liftVictor, RobotMap.controller);// Lower lift
 			}
-			TeleOp.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);// Intakes and expels cubes
+			new IntakeCube();
+			TeleOp.DropIntake(RobotMap.controller, RobotMap.intakeLifter);
+			TeleOp.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);
 			Timer.delay(0.005);
 		}
 	}

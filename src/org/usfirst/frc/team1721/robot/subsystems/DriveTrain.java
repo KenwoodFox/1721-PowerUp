@@ -18,8 +18,8 @@ public class DriveTrain extends Subsystem {
      * @param r The DriveTrain object.
      */
     public static void driveWithJoystick(Joystick j, DifferentialDrive r){
-    	double axis = j.getY();
-    	double turn = j.getZ() / 1.5;
+    	double axis = j.getY() * 0.85;
+    	double turn = j.getZ() * 0.75;
     	r.arcadeDrive(axis, turn);
     }
     /** Stops the bot.
