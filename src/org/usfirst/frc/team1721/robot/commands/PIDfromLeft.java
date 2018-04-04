@@ -17,7 +17,7 @@ public class PIDfromLeft extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Autonomous.PIDfromLeft(RobotMap.vspLeft, RobotMap.vspRight);
+    	//Autonomous.PIDfromLeft(RobotMap.vspLeft, RobotMap.vspRight);
     }
 
     // Called repeatedly when this Command is scheduled to run

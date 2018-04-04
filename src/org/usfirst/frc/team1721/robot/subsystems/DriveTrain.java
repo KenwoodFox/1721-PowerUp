@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1721.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -15,12 +16,12 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {}
     /**Drives the robot using a joystick.
      * @param j The drive joystick.
-     * @param r The DriveTrain object.
+     * @param rd The DriveTrain object.
      */
-    public static void driveWithJoystick(Joystick j, DifferentialDrive r){
-    	double axis = j.getY() * 0.85;
-    	double turn = j.getZ() * 0.75;
-    	r.arcadeDrive(axis, turn);
+    public static void driveWithJoystick(Joystick j, DifferentialDrive rd){
+    	double axis = j.getY() * 0.8;
+    	double turn = j.getZ() * 0.9;
+    	rd.arcadeDrive(axis, turn);
     }
     /** Stops the bot.
      * @param r The DriveTrain object.

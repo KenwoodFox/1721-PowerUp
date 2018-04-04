@@ -1,27 +1,27 @@
 package org.usfirst.frc.team1721.robot.commands;
 
 import org.usfirst.frc.team1721.robot.RobotMap;
-import org.usfirst.frc.team1721.robot.subsystems.Autonomous;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveToBaseline extends Command {
+public class ClosePiston extends Command {
 
-    public DriveToBaseline() {
+    public ClosePiston() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Autonomous.driveToBaseline(RobotMap.rd);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	RobotMap.piston.set(DoubleSolenoid.Value.kReverse);
     }
 
     // Make this return true when this Command no longer needs to run execute()
