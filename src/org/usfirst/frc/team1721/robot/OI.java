@@ -7,14 +7,6 @@
 
 package org.usfirst.frc.team1721.robot;
 
-import org.usfirst.frc.team1721.robot.commands.Climber;
-import org.usfirst.frc.team1721.robot.commands.ClimberStop;
-import org.usfirst.frc.team1721.robot.commands.ClosePiston;
-import org.usfirst.frc.team1721.robot.commands.OpenPiston;
-import org.usfirst.frc.team1721.robot.commands.SpinIn;
-import org.usfirst.frc.team1721.robot.commands.SpinOut;
-import org.usfirst.frc.team1721.robot.subsystems.TeleOp;
-
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -23,16 +15,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
-	public Button closeButton = new JoystickButton(RobotMap.controller, RobotMap.closeButton);
-	public Button openButton = new JoystickButton(RobotMap.controller, RobotMap.openButton);
-	public Button climbButton = new JoystickButton(RobotMap.controller, RobotMap.climbButton);
+	/*public static JoystickButton upButton, downButton;
 	public OI() {
-		closeButton.whileHeld(new ClosePiston());
-		openButton.whileHeld(new OpenPiston());
-		climbButton.whileHeld(new Climber());
-		climbButton.whenReleased(new ClimberStop()); // new stopClimber()
-	}
+		upButton = new JoystickButton(RobotMap.controller, 3);
+		downButton = new JoystickButton(RobotMap.controller, 1);
+		upButton.whenPressed(new RaiseIntake());
+		downButton.whenPressed(new DropIntake());
+	}*/
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
