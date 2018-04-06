@@ -1,9 +1,7 @@
 package org.usfirst.frc.team1721.robot;
 
-import org.usfirst.frc.team1721.robot.commands.GoToFloor;
-import org.usfirst.frc.team1721.robot.commands.GoToScale;
-import org.usfirst.frc.team1721.robot.commands.GoToSwitch;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1721.robot.subsystems.Lift;
 
 import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -70,6 +68,10 @@ public class Robot extends IterativeRobot {
 		RobotMap.goToFloorButton = new JoystickButton(RobotMap.controller, 1);
 		RobotMap.goToScaleButton = new JoystickButton(RobotMap.controller, 4);
 		RobotMap.goToSwitchButton = new JoystickButton(RobotMap.controller, 2);
+		
+		RobotMap.isAtFloor = true;
+		RobotMap.isAtScale = false;
+		RobotMap.isAtSwitch = false;
 	}
 	
 	
@@ -103,9 +105,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		RobotMap.isAtFloor = true;
-		RobotMap.isAtScale = false;
-		RobotMap.isAtSwitch = false;
 		while (isEnabled() && isAutonomous()) {
 		RobotMap.rd.arcadeDrive(10, 0);
 		}
@@ -121,9 +120,8 @@ public class Robot extends IterativeRobot {
 			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
 			//Intake.ExpelCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
 			//Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
-			RobotMap.goToFloorButton.whenPressed(new GoToFloor());
-			RobotMap.goToScaleButton.whenPressed(new GoToScale());
-			RobotMap.goToSwitchButton.whenPressed(new GoToSwitch());
+			Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+			Lift.RaiseLift(RobotMap.liftTalon, RobotMap.controller);
 		}
 	}
 

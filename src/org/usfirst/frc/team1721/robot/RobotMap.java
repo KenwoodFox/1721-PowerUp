@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * floating around.
  */
 public class RobotMap {
-	public static final int driveMasterLeft = 0, driveMasterRight = 1, driveSlaveLeft = 0, driveSlaveRight = 1, intakeLeft = 99, intakeRight = 99, liftMotor = 2;
-	public static final int intakeButton = 6, outputButton = 5;
+	public static final int driveMasterLeft = 0, driveMasterRight = 1, driveSlaveLeft = 1, driveSlaveRight = 0, intakeLeft = 99, intakeRight = 99, liftMotor = 2;
+	public static final int intakeButton = 6, outputButton = 5, raiseLiftAxis = 3, lowerLiftAxis = 2;
 	public static final double initialHeight = 0;
 	public static WPI_TalonSRX driveTalonLeft, driveTalonRight, liftTalon;
 	public static CANTalon canTalonLeft, canTalonRight;
@@ -33,5 +33,5 @@ public class RobotMap {
 	public static Button goToSwitchButton;
 	public static Button goToFloorButton;
 	public static boolean isAtFloor, isAtSwitch, isAtScale;
-	public static final double switchHeight = 0.5, scaleHeight = 1, switchToScale = 0.5;
+	public static final double switchHeight = 28.6, scaleHeight = 117.8, switchToScale = 89.2;
 }
