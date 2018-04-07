@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>PowerUpTestTwo</name>
@@ -16,3 +17,23 @@
 		<nature>edu.wpi.first.wpilib.plugins.core.nature.FRCProjectNature</nature>
 	</natures>
 </projectDescription>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>PowerUpTestTwo</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>edu.wpi.first.wpilib.plugins.core.nature.FRCProjectNature</nature>
+	</natures>
+</projectDescription>
+>>>>>>> 379d50797d294abeb901ba3ac6154c33b8dc3185
