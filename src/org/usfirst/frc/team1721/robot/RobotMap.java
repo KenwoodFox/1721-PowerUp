@@ -1,23 +1,14 @@
 package org.usfirst.frc.team1721.robot;
 
-<<<<<<< HEAD
+
 import com.ctre.CANTalon;
-=======
->>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.DriverStation;
-=======
 import edu.wpi.first.wpilibj.DigitalInput;
->>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 import edu.wpi.first.wpilibj.Joystick;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.buttons.Button;
-=======
->>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
@@ -44,5 +35,4 @@ public class RobotMap {
 
 	public static FeedbackDevice encRight;
 	public static FeedbackDevice encLeft;
->>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 }
