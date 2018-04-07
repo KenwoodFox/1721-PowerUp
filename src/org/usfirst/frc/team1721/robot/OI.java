@@ -9,15 +9,19 @@ package org.usfirst.frc.team1721.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+<<<<<<< HEAD
 import org.usfirst.frc.team1721.robot.RobotMap;
 import org.usfirst.frc.team1721.robot.commands.*;
 import org.usfirst.frc.team1721.robot.subsystems.Intake;
+=======
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+<<<<<<< HEAD
 	/*Button intakeButton = new JoystickButton(RobotMap.stick, RobotMap.intakeButton);
 	Button outputButton = new JoystickButton(RobotMap.stick, RobotMap.outputButton);
 	public OI(){
@@ -25,6 +29,15 @@ public class OI {
 		outputButton.whenPressed(new ExpelCube());
 	}*/
 	
+=======
+	/*public static JoystickButton upButton, downButton;
+	public OI() {
+		upButton = new JoystickButton(RobotMap.controller, 3);
+		downButton = new JoystickButton(RobotMap.controller, 1);
+		upButton.whenPressed(new RaiseIntake());
+		downButton.whenPressed(new DropIntake());
+	}*/
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
