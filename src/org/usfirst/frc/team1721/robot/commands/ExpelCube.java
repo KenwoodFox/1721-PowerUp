@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1721.robot.commands;
 
 import org.usfirst.frc.team1721.robot.RobotMap;
-<<<<<<< HEAD
 import org.usfirst.frc.team1721.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeCube extends Command {
+public class ExpelCube extends Command {
 
-    public IntakeCube() {
+    public ExpelCube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -22,30 +21,7 @@ public class IntakeCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
-=======
-import org.usfirst.frc.team1721.robot.subsystems.TeleOp;
-
-import edu.wpi.first.wpilibj.command.Command;
-
-/**
- *
- */
-public class IntakeCube extends Command {
-
-    public IntakeCube() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	TeleOp.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);
->>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
+    	Intake.ExpelCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
     }
 
     // Make this return true when this Command no longer needs to run execute()

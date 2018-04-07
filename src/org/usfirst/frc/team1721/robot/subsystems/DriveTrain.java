@@ -13,15 +13,24 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {}
+    
+    public static void driveWithJoystick(Joystick j, DifferentialDrive r){
+    	double axis = j.getY();
+    	double turn = j.getZ();
+    	r.arcadeDrive(axis, turn);
+    }
     /**Drives the robot using a joystick.
      * @param j The drive joystick.
      * @param r The DriveTrain object.
      */
-    public static void driveWithJoystick(Joystick j, DifferentialDrive r){
+    
+    // Uncomment for previous drive code
+    /*public static void driveWithJoystick(Joystick j, DifferentialDrive r){
     	double axis = j.getY() * 0.85;
     	double turn = j.getZ() * 0.75;
     	r.arcadeDrive(axis, turn);
-    }
+    }*/
+    
     /** Stops the bot.
      * @param r The DriveTrain object.
      */
