@@ -17,7 +17,7 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item value="edu.wpi.first.wpilib.plugins.java.wizards.examples.ExampleWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="edu.wpi.first.wpilib.plugins.java.wizards.file_template.SubsystemWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="edu.wpi.first.wpilib.plugins.java"/>
 		</list>
@@ -27,7 +27,7 @@
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="728" key="DIALOG_HEIGHT"/>
 		<item value="88" key="DIALOG_X_ORIGIN"/>
-		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="ImportExportAction">
 	</section>
