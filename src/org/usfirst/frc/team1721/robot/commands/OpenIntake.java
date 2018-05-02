@@ -1,23 +1,19 @@
 package org.usfirst.frc.team1721.robot.commands;
 
-import org.usfirst.frc.team1721.robot.RobotMap;
-import org.usfirst.frc.team1721.robot.subsystems.Autonomous;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class PIDfromLeft extends Command {
+public class OpenIntake extends Command {
 
-    public PIDfromLeft() {
+    public OpenIntake() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Autonomous.PIDfromLeft(RobotMap.vspLeft, RobotMap.vspRight);
     }
 
     // Called repeatedly when this Command is scheduled to run

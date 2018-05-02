@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PIDfromLeft extends Command {
+public class ScaleAutoLeft extends Command {
 
-    public PIDfromLeft() {
+    public ScaleAutoLeft() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Autonomous.PIDfromLeft(RobotMap.vspLeft, RobotMap.vspRight);
+    	Autonomous.ScaleAutoLeft(RobotMap.rd, RobotMap.liftVictor, RobotMap.intakeVictorLeft, RobotMap.intakeLifter, RobotMap.piston);
     }
 
     // Called repeatedly when this Command is scheduled to run

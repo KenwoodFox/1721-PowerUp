@@ -4,10 +4,13 @@
 
 package org.usfirst.frc.team1721.robot.subsystems;
 
+import org.usfirst.frc.team1721.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,13 +26,32 @@ public class Autonomous extends Subsystem {
     public void initDefaultCommand() {
     	
     }
-    public static void driveToBaseline(DifferentialDrive d, WPI_VictorSPX intakeLifter) {
-    	//intakeLifter.set(-0.8);
-    	//Timer.delay(3);
-    	//intakeLifter.set(0);
-    	d.arcadeDrive(-0.5, 0);
-    	Timer.delay(5);
+    public static void leftOnly(DifferentialDrive d, WPI_TalonSRX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter) {
+    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R') {
+    		d.arcadeDrive(-0.5, 0.11);
+			Timer.delay(2);
+			lift.set(-0.6);
+    		Timer.delay(1);
+    		lift.set(0);
+    		Timer.delay(4);
+    		d.arcadeDrive(0, 0);
+    		intakeLifter.set(-0.8);
+    		Timer.delay(0.8);
+    		intakeLifter.set(0);
+    		intake.set(-1);
+    		Timer.delay(5);
+    		intake.set(0);
+    	}else {
+    		d.arcadeDrive(-0.5, 0.11);
+    		Timer.delay(7);
+    		d.arcadeDrive(0, 0);
+    	}
+    }
+    public static void driveToBaseline(DifferentialDrive d, DoubleSolenoid piston) {
+    	d.arcadeDrive(-0.7, 0.17);
+    	Timer.delay(3);
     	d.arcadeDrive(0, 0);
+    	piston.set(DoubleSolenoid.Value.kReverse);
     }
     public static void PIDfromLeft(WPI_TalonSRX port, WPI_TalonSRX starboard) {
     	port.selectProfileSlot(0, 0);
@@ -59,71 +81,108 @@ public class Autonomous extends Subsystem {
     	starboard.set(ControlMode.Position, 400);
     	port.set(ControlMode.Position, 400);
     }
-    public static void switchFromLeft(DifferentialDrive d, WPI_VictorSPX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter) {
+    public static void switchFromLeft(DifferentialDrive d, WPI_TalonSRX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter) {
     	if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'L') {
-	    	d.arcadeDrive(-0.48, 0);
-	    	Timer.delay(5);
-	    	d.arcadeDrive(0, 0);
-	    	intakeLifter.set(0.8);
-	    	Timer.delay(0.8);
-	    	intakeLifter.set(0);
-	    	intake.set(1);
-	    	Timer.delay(5);
-	    	intake.set(0);
-    	}else {
-    		d.arcadeDrive(-0.48, 0);
+    		d.arcadeDrive(-0.5, 0.27);
+    		Timer.delay(2);
+    		lift.set(-0.6);
 	    	Timer.delay(1);
-	    	d.arcadeDrive(0, -0.67);
-	    	Timer.delay(0.7);
-	    	d.arcadeDrive(-0.48, 0);
-	    	Timer.delay(5);
-	    	d.arcadeDrive(0, 0.67);
-	    	Timer.delay(0.7);
-	    	d.arcadeDrive(-0.48, 0);
-	    	Timer.delay(4);
-	    	d.arcadeDrive(0, 0);
-	    	/*intakeLifter.set(0.8);
-	    	Timer.delay(0.8);
-	    	intakeLifter.set(0);
-	    	intake.set(1);
-	    	Timer.delay(5);
-	    	intake.set(0);*/
-    	}
-    }
-    public static void switchFromRight(DifferentialDrive d, WPI_VictorSPX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter) {
-    	/*intakeLifter.set(-0.8);
-    	Timer.delay(3);
-    	intakeLifter.set(0);
-    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R') {
-    		d.arcadeDrive(-0.48, 0);
-    		Timer.delay(0);
-    		d.arcadeDrive(0, 0);
-    		lift.set(1);
-    		Timer.delay(0.3);
-    		intake.set(1);
-    		Timer.delay(0.2);
-    		lift.set(0.8);
-    		Timer.delay(1.8);
-    		intake.set(0);
-    	}else {
-    		d.arcadeDrive(-0.45, 0);
-    		Timer.delay(5);
-    		d.arcadeDrive(0, 0);
-    	}*/
-    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R') {
-	    	d.arcadeDrive(-0.48, 0);
-	    	Timer.delay(5);
+	    	lift.set(0);
+    		Timer.delay(3.5);
 	    	d.arcadeDrive(0, 0);
 	    	intakeLifter.set(-0.8);
 	    	Timer.delay(0.8);
 	    	intakeLifter.set(0);
-	    	intake.set(1);
+	    	intake.set(-1);
 	    	Timer.delay(5);
 	    	intake.set(0);
     	}else {
-    		d.arcadeDrive(-0.48, 0);
-	    	Timer.delay(5);
+    		d.arcadeDrive(-0.52, 0.27);
+	    	Timer.delay(2.3);
+	    	d.arcadeDrive(0, 0.66);
+	    	Timer.delay(0.7);
+	    	d.arcadeDrive(-0.58, 0.1);
+	    	Timer.delay(5.2);
+	    	d.arcadeDrive(0, -0.75);
+	    	Timer.delay(0.7);
+	    	d.arcadeDrive(-0.6, 0.1);
+	    	lift.set(-0.6);
+	    	Timer.delay(2);
+	    	lift.set(0);
+	    	Timer.delay(1.5);
 	    	d.arcadeDrive(0, 0);
+	    	intakeLifter.set(-0.8);
+	    	Timer.delay(0.8);
+	    	intakeLifter.set(0);
+	    	intake.set(-1);
+	    	Timer.delay(5);
+	    	intake.set(0);
+    	}
+    }
+    public static void switchFromRight(DifferentialDrive d, WPI_TalonSRX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter) {
+    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R') {
+    		d.arcadeDrive(-0.5, 0.2);
+    		Timer.delay(2);
+    		lift.set(-0.6);
+	    	Timer.delay(1);
+	    	lift.set(0);
+    		Timer.delay(3.5);
+	    	d.arcadeDrive(0, 0);
+	    	intakeLifter.set(-0.8);
+	    	Timer.delay(0.8);
+	    	intakeLifter.set(0);
+	    	intake.set(-1);
+	    	Timer.delay(5);
+	    	intake.set(0);
+    	}else {
+    		d.arcadeDrive(-0.52, 0.27);
+	    	Timer.delay(2.3);
+	    	d.arcadeDrive(0, -0.66);
+	    	Timer.delay(0.7);
+	    	d.arcadeDrive(-0.58, 0.1);
+	    	Timer.delay(5.2);
+	    	d.arcadeDrive(0, 0.75);
+	    	Timer.delay(0.7);
+	    	d.arcadeDrive(-0.6, 0.1);
+	    	lift.set(-0.6);
+	    	Timer.delay(2);
+	    	lift.set(0);
+	    	Timer.delay(1.5);
+	    	d.arcadeDrive(0, 0);
+	    	intakeLifter.set(-0.8);
+	    	Timer.delay(0.8);
+	    	intakeLifter.set(0);
+	    	intake.set(-1);
+	    	Timer.delay(5);
+	    	intake.set(0);
+    	}
+    }
+    public static void ScaleAutoRight(DifferentialDrive d, WPI_VictorSPX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter, DoubleSolenoid piston) {
+    	d.arcadeDrive(1, 0);
+    	Timer.delay(5);
+    	d.arcadeDrive(0, 0);
+    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R') {
+    		while(RobotMap.isAtTop.get() != true) {
+        		lift.set(1);
+        	}
+        	intakeLifter.set(-0.8);
+        	Timer.delay(0.8);
+        	intakeLifter.set(0);
+        	intake.set(-1);
+    	}
+    }
+    public static void ScaleAutoLeft(DifferentialDrive d, WPI_VictorSPX lift, WPI_VictorSPX intake, WPI_VictorSPX intakeLifter, DoubleSolenoid piston) {
+    	d.arcadeDrive(1, 0);
+    	Timer.delay(5);
+    	d.arcadeDrive(0, 0);
+    	if(DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'L') {
+    		while(RobotMap.isAtTop.get() != true) {
+        		lift.set(1);
+        	}
+        	intakeLifter.set(-0.8);
+        	Timer.delay(0.8);
+        	intakeLifter.set(0);
+        	intake.set(-1);
     	}
     }
     /** Shows switch and scale positions on SmartDashboard. Open YML.yml.xml to

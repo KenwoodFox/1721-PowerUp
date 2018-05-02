@@ -17,7 +17,7 @@ public class DriveToBaseline extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Autonomous.driveToBaseline(RobotMap.rd, RobotMap.intakeLifter);
+    	Autonomous.driveToBaseline(RobotMap.rd, RobotMap.piston);
     }
 
     // Called repeatedly when this Command is scheduled to run

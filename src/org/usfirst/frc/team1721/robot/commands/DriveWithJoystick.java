@@ -2,6 +2,7 @@ package org.usfirst.frc.team1721.robot.commands;
 
 import org.usfirst.frc.team1721.robot.Robot;
 import org.usfirst.frc.team1721.robot.RobotMap;
+import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,7 +22,7 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.dt.driveWithJoystick(RobotMap.stick, RobotMap.rd);
+    	DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
     }
 
     // Make this return true when this Command no longer needs to run execute()
