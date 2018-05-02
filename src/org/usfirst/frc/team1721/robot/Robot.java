@@ -12,10 +12,21 @@ import org.usfirst.frc.team1721.robot.commands.SwitchFromRight;
 import org.usfirst.frc.team1721.robot.commands.leftOnly;
 import org.usfirst.frc.team1721.robot.subsystems.Autonomous;
 import org.usfirst.frc.team1721.robot.subsystems.DriveTrain;
+<<<<<<< HEAD
+import org.usfirst.frc.team1721.robot.subsystems.Lift;
+=======
 import org.usfirst.frc.team1721.robot.subsystems.TeleOp;
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 
+<<<<<<< HEAD
+import com.ctre.CANTalon;
+=======
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+<<<<<<< HEAD
 import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
+=======
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
+>>>>>>> 25a46901b680da9df7b41ca48d38c709a0c4fd96
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -23,7 +34,15 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+=======
+import edu.wpi.first.wpilibj.Timer;
+>>>>>>> 25a46901b680da9df7b41ca48d38c709a0c4fd96
 import edu.wpi.first.wpilibj.command.Command;
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -52,6 +71,46 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		dt = new DriveTrain();
+<<<<<<< HEAD
+		//Declare drive Talons
+		RobotMap.driveTalonLeft = new WPI_TalonSRX(RobotMap.driveMasterLeft);
+		RobotMap.driveTalonRight = new WPI_TalonSRX(RobotMap.driveMasterRight);
+		//Declare drive Victors for WPI purposes
+		RobotMap.driveVictorLeft = new WPI_VictorSPX(RobotMap.driveSlaveLeft);
+		RobotMap.driveVictorRight = new WPI_VictorSPX(RobotMap.driveSlaveRight);
+		//Declare drivetrain
+		RobotMap.rd = new DifferentialDrive(RobotMap.driveTalonLeft, RobotMap.driveTalonRight);
+		//Turn off safety
+		RobotMap.driveTalonLeft.setSafetyEnabled(false);
+		RobotMap.driveTalonRight.setSafetyEnabled(false);
+		RobotMap.rd.setSafetyEnabled(false);
+		//Declare joystick
+		RobotMap.stick = new Joystick(RobotMap.stickPort);
+		//Declare controller
+		RobotMap.controller = new Joystick(RobotMap.controllerPort);
+		//Set drive Victors to follower mode
+		RobotMap.driveVictorLeft.follow(RobotMap.driveTalonLeft);
+		RobotMap.driveVictorRight.follow(RobotMap.driveTalonRight);
+		//Declare drive Victors for CTRE purposes
+		RobotMap.canTalonRight = new CANTalon(RobotMap.driveMasterRight);
+		RobotMap.canTalonLeft = new CANTalon(RobotMap.driveMasterLeft);
+		//Declare intake Victors
+		RobotMap.intakeVictorLeft = new WPI_VictorSPX(RobotMap.intakeLeft);
+		RobotMap.intakeVictorRight = new WPI_VictorSPX(RobotMap.intakeRight);
+		//Declare lift Talon
+		RobotMap.liftTalon = new WPI_TalonSRX(RobotMap.liftMotor);
+		
+		RobotMap.goToFloorButton = new JoystickButton(RobotMap.controller, 1);
+		RobotMap.goToScaleButton = new JoystickButton(RobotMap.controller, 4);
+		RobotMap.goToSwitchButton = new JoystickButton(RobotMap.controller, 2);
+		
+		RobotMap.isAtFloor = true;
+		RobotMap.isAtScale = false;
+		RobotMap.isAtSwitch = false;
+	}
+	
+	
+=======
 		//Initialize drive Talons
 		RobotMap.vspLeft = new WPI_TalonSRX(RobotMap.dtLeft);
 		RobotMap.vspRight = new WPI_TalonSRX(RobotMap.dtRight);
@@ -117,6 +176,16 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 	}
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
+
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+>>>>>>> 25a46901b680da9df7b41ca48d38c709a0c4fd96
 	@Override
 	public void disabledInit() {
 
@@ -128,28 +197,73 @@ public class Robot extends IterativeRobot {
 	}
 	@Override
 	public void autonomousInit() {
+<<<<<<< HEAD
 		RobotMap.piston.set(DoubleSolenoid.Value.kForward);
+=======
+<<<<<<< HEAD
+		while (isEnabled() && isAutonomous()) {
+		RobotMap.rd.arcadeDrive(10, 0);
+		}
+=======
+>>>>>>> 25a46901b680da9df7b41ca48d38c709a0c4fd96
 		Autonomous.showSwitchPositions();
 		autonomousCommand = (Command) autoChooser.getSelected();
 		autonomousCommand.start();
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
+<<<<<<< HEAD
+	
+=======
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 	@Override
 	public void teleopInit() {
+<<<<<<< HEAD
 		
+=======
+<<<<<<< HEAD
+		while (isEnabled() && isOperatorControl()) {
+			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd);
+			//Intake.ExpelCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
+			//Intake.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.intakeVictorRight, RobotMap.controller);
+			Lift.LowerLift(RobotMap.liftTalon, RobotMap.controller);
+			Lift.RaiseLift(RobotMap.liftTalon, RobotMap.controller);
+=======
+		while(isEnabled() && isOperatorControl()){ // Runs periodically (every 25 ms) during teleop
+			//RobotMap.intakeLifter.set(-0.8);
+			SmartDashboard.putBoolean("Max Intake Extension: ", RobotMap.intakeLifted.get());
+			SmartDashboard.putBoolean("Max Lift Extension:", RobotMap.isAtTop.get());
+			SmartDashboard.putBoolean("Min Lift Extension:", RobotMap.isAtBottom.get());
+			DriveTrain.driveWithJoystick(RobotMap.stick, RobotMap.rd); // Drive
+			TeleOp.RaiseLift(RobotMap.liftVictor, RobotMap.controller); // Raise lift
+			if(RobotMap.controller.getRawAxis(2) > 0) { // Ensures brake mode does not stop the lift from rising
+				TeleOp.LowerLift(RobotMap.liftVictor, RobotMap.controller);// Lower lift
+			}
+			new IntakeCube();
+			TeleOp.DropIntake(RobotMap.controller, RobotMap.intakeLifter);
+			TeleOp.IntakeCube(RobotMap.intakeVictorLeft, RobotMap.controller);
+			Timer.delay(0.005);
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
+		}
+>>>>>>> 25a46901b680da9df7b41ca48d38c709a0c4fd96
 	}
 
 	/**
 	 * This function is called periodically during operator control
 	 */
+<<<<<<< HEAD
+public void teleopPeriodic() {
+	Scheduler.getInstance().run();
+}
+=======
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
@@ -166,6 +280,7 @@ public class Robot extends IterativeRobot {
 		//TeleOp.spinnySpinny(RobotMap.intakeVictorLeft, RobotMap.stick);
 	}
 
+>>>>>>> branch 'master' of https://github.com/KenwoodFox/2018-PowerUp
 	/**
 	 * This function is called periodically during test mode
 	 */
